@@ -1,0 +1,11 @@
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/install/strip.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/install.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/list_install_components.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/edit_cache.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/rebuild_cache.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/package_source.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/package.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/install/local.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/test.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/gtests.dir
+/Users/dvdemon/OneDrive/Documents/Lectures/OOP/2020/Highload/hl_homework_01/CMakeFiles/CMakeFiles/server.dir
