@@ -11,7 +11,7 @@ SET (WEBSERVICE_BINARY "server")
 
 find_package(GTest REQUIRED)
 find_package(Threads)
-find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL)
+find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL DataMySQL)
 
 if(NOT ${Poco_FOUND})
     message(FATAL_ERROR "Poco C++ Libraries not found.")
@@ -21,7 +21,7 @@ include_directories(${Poco_INCLUDE_DIRS})
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(${WEBSERVICE_BINARY} main.cpp 
-                )
+                                    database/database.cpp)
 
 target_include_directories(${WEBSERVICE_BINARY} PRIVATE "${CMAKE_BINARY_DIR}")
 target_compile_options(${WEBSERVICE_BINARY} PRIVATE -Wall -Wextra -pedantic -Werror )

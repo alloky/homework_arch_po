@@ -1,5 +1,5 @@
-#ifndef HTTPREQUESTFACTORY_H
-#define HTTPREQUESTFACTORY_H
+#ifndef WEBPAGEHANDLER_H
+#define WEBPAGEHANDLER_H
 
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPRequestHandler.h"
@@ -19,6 +19,8 @@
 #include "Poco/Util/OptionSet.h"
 #include "Poco/Util/HelpFormatter.h"
 #include <iostream>
+#include <iostream>
+#include <fstream>
 
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPRequestHandler;
@@ -38,36 +40,37 @@ using Poco::Util::OptionSet;
 using Poco::Util::OptionCallback;
 using Poco::Util::HelpFormatter;
 
-#include "handlers/TimeRequestHandler.h"
-#include "handlers/WebPageHandler.h"
-
-static bool endsWith(const std::string& str, const std::string& suffix)
-{
-    return str.size() >= suffix.size() && 0 == str.compare(str.size()-suffix.size(), suffix.size(), suffix);
-}
-
-class HTTPRequestFactory: public HTTPRequestHandlerFactory
+class WebPageHandler: public HTTPRequestHandler
 {
 public:
-    HTTPRequestFactory(const std::string& format):
-        _format(format)
+    WebPageHandler(const std::string& format): _format(format)
     {
     }
 
-    HTTPRequestHandler* createRequestHandler(
-        const HTTPServerRequest& request)
+    void handleRequest(HTTPServerRequest& request,
+                       HTTPServerResponse& response)
     {
-        std::string html=".html"; 
-        if (request.getURI() == "/")
-            return new TimeRequestHandler(_format);
-        if (endsWith(request.getURI(),html))
-            return new WebPageHandler(_format);
-        else
-            return 0;
+        Application& app = Application::instance();
+        app.logger().information("HTML Request from "
+            + request.clientAddress().toString());
+
+        response.setChunkedTransferEncoding(true);
+        response.setContentType("text/html");
+
+        std::ostream& ostr = response.send();
+
+        std::ifstream file;
+        std::string name="content"+request.getURI();
+        file.open(name, std::ifstream::binary);
+
+        if (file.is_open())
+            while (file.good())
+                ostr <<  (char)file.get();
+
+        file.close();
     }
 
 private:
     std::string _format;
 };
-
-#endif
+#endif // !WEBPAGEHANDLER_H
