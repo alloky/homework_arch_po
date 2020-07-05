@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Dummy Social Network</title>
+ <style>
+     label {
+        display: block;
+        font: .9rem 'Fira Sans', sans-serif;
+        }
+    input[type='submit'],
+        label {
+            margin-top: 1rem;
+        }
+  </style>
+ <script>
+     window.onload = function(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const session_id = urlParams.get('session_id')
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:9980/person?session_id=" + session_id, true);
+        xhr.send();
+        
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status== 200){
+                var jsonData = xhr.responseText;
+                var jsObject = JSON.parse(jsonData);
+                document.getElementById("login").value = jsObject.login;
+                document.getElementById("first_name").value = jsObject.first_name;
+                document.getElementById("last_name").value = jsObject.last_name;
+                document.getElementById("age").value = jsObject.age;
+                document.getElementById("hobby").value = jsObject.hobby;
+                document.getElementById("city").value = jsObject.city;
+                }
+            }
+     };
+ </script>
+ </head>
+ <body> 
+ <h2>Personal information</h2>
+ <div>
+    <label for="login">Username:</label>
+    <input type="text" id="login" name="login">
+ </div>
+<div>
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name">
+</div>
+<div>
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name">
+</div>
+<div>
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age">
+</div>
+<div>
+    <label for="hobby">Hobby:</label>
+    <input type="text" id="hobby" name="hobby">
+</div>
+<div>
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+</div>
+ </body>
+</html>

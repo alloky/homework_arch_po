@@ -60,12 +60,19 @@ public:
         std::ostream& ostr = response.send();
 
         std::ifstream file;
-        std::string name="content"+request.getURI();
+
+        auto pos = request.getURI().find('?');
+        std::string uri = request.getURI();
+        if(pos!=std::string::npos) uri = uri.substr(0,pos);
+        std::string name="content"+uri;
         file.open(name, std::ifstream::binary);
 
         if (file.is_open())
-            while (file.good())
-                ostr <<  (char)file.get();
+            while (file.good()){
+                int sign = file.get();
+                if(sign>0)
+                ostr <<  (char)sign;
+            }
 
         file.close();
     }

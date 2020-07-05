@@ -21,6 +21,7 @@ include_directories(${Poco_INCLUDE_DIRS})
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(${WEBSERVICE_BINARY} main.cpp 
+                                    web_server/session/session.cpp
                                     database/database.cpp)
 
 target_include_directories(${WEBSERVICE_BINARY} PRIVATE "${CMAKE_BINARY_DIR}")

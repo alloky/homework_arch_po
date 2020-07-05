@@ -40,11 +40,20 @@ using Poco::Util::HelpFormatter;
 
 #include "handlers/TimeRequestHandler.h"
 #include "handlers/WebPageHandler.h"
-
+#include "handlers/PersonHandler.h"
+#include "handlers/LoginHandler.h"
+#include "handlers/SignupHandler.h"
+/*
 static bool endsWith(const std::string& str, const std::string& suffix)
 {
     return str.size() >= suffix.size() && 0 == str.compare(str.size()-suffix.size(), suffix.size(), suffix);
+}*/
+
+static bool startsWith(const std::string& str, const std::string& prefix)
+{
+    return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
 }
+
 
 class HTTPRequestFactory: public HTTPRequestHandlerFactory
 {
@@ -58,12 +67,18 @@ public:
         const HTTPServerRequest& request)
     {
         std::string html=".html"; 
-        if (request.getURI() == "/")
-            return new TimeRequestHandler(_format);
-        if (endsWith(request.getURI(),html))
-            return new WebPageHandler(_format);
-        else
-            return 0;
+        std::string person = "/person";
+        std::string login = "/login";
+        std::string signup = "/signup";
+
+
+        if (request.getURI() == "/")   return new TimeRequestHandler(_format);
+        if (request.getURI().find(html)!=std::string::npos)     return new WebPageHandler(_format);
+        if (startsWith(request.getURI(),person)) return new PersonHandler(_format);
+        if (startsWith(request.getURI(),login))  return new LoginHandler(_format);
+        if (startsWith(request.getURI(),signup))  return new SignupHandler(_format);
+
+        return 0;
     }
 
 private:
