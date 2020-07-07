@@ -5,7 +5,8 @@ project(hl_homework_01 C CXX)
 SET (WEBSERVICE_BINARY "server")
 
 include(FindPkgConfig)
-pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
+find_package(PkgConfig QUIET REQUIRED)
+pkg_check_modules(MYSQL REQUIRED QUIET mysqlclient)
 
 find_package(OpenSSL)
 find_package(GTest REQUIRED)
