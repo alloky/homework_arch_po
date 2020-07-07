@@ -7,7 +7,7 @@ SET (WEBSERVICE_BINARY "server")
 find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
-find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL DataMySQL)
+find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL Data DataMySQL)
 
 if(NOT ${Poco_FOUND})
     message(FATAL_ERROR "Poco C++ Libraries not found.")
@@ -27,13 +27,11 @@ add_executable(gtests tests.cpp)
 
 target_link_libraries(gtests ${GTEST_LIBRARIES} 
                              ${CMAKE_THREAD_LIBS_INIT}                             
-                             ${Poco_LIBRARIES}
-                             mysqlclient)
+                             ${Poco_LIBRARIES})
 
 target_link_libraries(${WEBSERVICE_BINARY} PRIVATE 
                              ${CMAKE_THREAD_LIBS_INIT} 
-                             ${Poco_LIBRARIES}
-                             mysqlclient)
+                             ${Poco_LIBRARIES})
 
 set_target_properties(gtests PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES LINKER_LANGUAGE CXX)
