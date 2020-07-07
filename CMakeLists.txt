@@ -4,10 +4,6 @@ project(hl_homework_01 C CXX)
 
 SET (WEBSERVICE_BINARY "server")
 
-include(FindPkgConfig)
-find_package(PkgConfig QUIET REQUIRED)
-pkg_check_modules(MYSQL REQUIRED QUIET mysqlclient)
-
 find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
@@ -31,11 +27,13 @@ add_executable(gtests tests.cpp)
 
 target_link_libraries(gtests ${GTEST_LIBRARIES} 
                              ${CMAKE_THREAD_LIBS_INIT}                             
-                             ${Poco_LIBRARIES})
+                             ${Poco_LIBRARIES}
+                             mysqlclient)
 
 target_link_libraries(${WEBSERVICE_BINARY} PRIVATE 
                              ${CMAKE_THREAD_LIBS_INIT} 
-                             ${Poco_LIBRARIES})
+                             ${Poco_LIBRARIES}
+                             mysqlclient)
 
 set_target_properties(gtests PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES LINKER_LANGUAGE CXX)
