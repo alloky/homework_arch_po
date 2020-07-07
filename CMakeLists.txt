@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-if($ENV{TRAVIS_BUILD_NUMBER})
- project(hl_homework_01 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-else()
- project(hl_homework_01 VERSION 0.0.1)
-endif()
+project(hl_homework_01 C CXX)
 
 SET (WEBSERVICE_BINARY "server")
 
@@ -40,6 +36,8 @@ target_link_libraries(${WEBSERVICE_BINARY} PRIVATE
                              ${CMAKE_THREAD_LIBS_INIT} 
                              ${Poco_LIBRARIES})
 
+set_target_properties(gtests PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(${WEBSERVICE_BINARY} PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(gtests PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 
