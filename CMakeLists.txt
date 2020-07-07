@@ -8,7 +8,7 @@ endif()
 
 SET (WEBSERVICE_BINARY "server")
 
-
+find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
 find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL DataMySQL)
