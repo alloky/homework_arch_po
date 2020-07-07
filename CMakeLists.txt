@@ -8,6 +8,9 @@ endif()
 
 SET (WEBSERVICE_BINARY "server")
 
+include(FindPkgConfig)
+pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
+
 find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
