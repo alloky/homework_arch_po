@@ -19,7 +19,7 @@
         const session_id = urlParams.get('session_id')
         var xhr = new XMLHttpRequest();
 
-        xhr.open("GET", "http://localhost:9980/person?session_id=" + session_id, true);
+        xhr.open("GET", "person?session_id=" + session_id, true);
         xhr.send();
         
         xhr.onreadystatechange = function(){

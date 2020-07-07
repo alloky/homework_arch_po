@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
- <title>Dummy Social Network</title>
+ <title>Dynamic Dropdown</title>
  <style>
      label {
         display: block;
@@ -19,7 +19,7 @@
         var xhr = new XMLHttpRequest();
         var name = document.getElementById("username").value;
         var password = document.getElementById("pass").value;
-        xhr.open("GET", "http://localhost:9980/login?login=" + name+"&password="+password, true);
+        xhr.open("GET", "login?login=" + name+"&password="+password, true);
         xhr.send();
         
         xhr.onreadystatechange = function(){
@@ -27,7 +27,7 @@
                 var jsonData = xhr.responseText;
                 var jsObject = JSON.parse(jsonData);
                     if(jsObject.result==true){
-                        window.location="http://localhost:9980/main.html?session_id="+jsObject.session_id;
+                        window.location="main.html?session_id="+jsObject.session_id;
                     } else {
                         document.getElementById("message").innerHTML="<br><b>Invalid name or password</b><br>";
                     }
@@ -51,5 +51,6 @@
 
 <div id="message"></div>
 <input type="submit" value="Sign in" onclick="login();">
+<input type="submit" value="Sign up" onclick="window.location='signup.html';">
  </body>
 </html>
