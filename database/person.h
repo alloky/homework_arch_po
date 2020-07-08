@@ -4,7 +4,7 @@
 #include "Poco/JSON/Object.h"
 #include <string>
 #include <vector>
-#include "database.h"
+#include "database_mysql.h"
 
 namespace database{
     struct Person{
@@ -31,87 +31,82 @@ namespace database{
             }
 
             static bool   check_exist(std::string & login){
-                int count{};
-                Statement select(Database::get().get_session());
-                select << "SELECT count(*) FROM hl.person WHERE login=?",
-                    into(count),
-                    use(login),
-                    range(0, 1);
+                int count{-1};
 
-                while (!select.done())
+                std::string query="SELECT count(*) FROM person WHERE login='"+login+"'";
+                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
                 {
-                    select.execute();
-                    if(select.rowsExtracted()>0)
-                                        return count>0;
-                                        else throw std::logic_error("Not found");
-                }
+                    if ((row ==0)&&(column==0)) count = atoi(value.c_str());
+                },[](int){});
 
-                throw std::logic_error("Not found");
+                if(count<0) throw std::logic_error("error executing query");
+                return (count>0) ;
             }
 
             static Person get_person(std::string & match){
                 Person person;
+                bool found{};
 
-                Statement select(Database::get().get_session());
-                select << "SELECT login, password_hash, first_name,last_name,age,hobby,city FROM hl.person WHERE login=?",
-                    into(person.login),
-                    into(person.password_hash),
-                    into(person.first_name),
-                    into(person.last_name),
-                    into(person.age),
-                    into(person.hobby),
-                    into(person.city),
-                    use(match),
-                    range(0, 1); //  iterate over result set one row at a time
 
-                while (!select.done())
+                std::string query="SELECT login, password_hash, first_name,last_name,age,hobby,city FROM person WHERE login='"+match+"'";
+                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
                 {
-                    select.execute();
-                    if(select.rowsExtracted()>0)
-                                        return person;
-                                        else throw std::logic_error("Not found");
-                }
+                    found = true;
+                    if (row ==0)
+                        switch(column){
+                            case 0: person.login = value; break;
+                            case 1: person.password_hash= value;break;
+                            case 2: person.first_name=value;break;
+                            case 3: person.last_name=value;break;
+                            case 4: person.age=atoi(value.c_str());break;
+                            case 5: person.hobby=value;break;
+                            case 6: person.city=value;break;
+                        }
+                    
+                },[](int){});
 
-                throw std::logic_error("Not found");
+                if(found) return person;
+
+                throw std::logic_error("not found");
             }
 
             static std::vector<Person> get_persons(){
                 std::vector<Person> result;
                 Person person;
 
-                Statement select(Database::get().get_session());
-                select << "SELECT login, password_hash, first_name,last_name,age,hobby,city FROM hl.person",
-                    into(person.login),
-                    into(person.password_hash),
-                    into(person.first_name),
-                    into(person.last_name),
-                    into(person.age),
-                    into(person.hobby),
-                    into(person.city),
-                    range(0, 1); //  iterate over result set one row at a time
-
-                while (!select.done())
+                std::string query="SELECT login, password_hash, first_name,last_name,age,hobby,city FROM person";
+                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
                 {
-                    select.execute();
-                    std::cout << person.login << " " << person.password_hash << std::endl;
+                    if (row ==0)
+                        switch(column){
+                            case 0: person.login = value; break;
+                            case 1: person.password_hash= value;break;
+                            case 2: person.first_name=value;break;
+                            case 3: person.last_name=value;break;
+                            case 4: person.age=atoi(value.c_str());break;
+                            case 5: person.hobby=value;break;
+                            case 6: person.city=value;break;
+                        }
+                    
+                },[&](int){
                     result.push_back(person);
-                }
+                });
+                
 
                 return result;
             }
 
             void insert(){
-                Statement insert(Database::get().get_session());
-
-                insert << "INSERT INTO hl.person VALUES(?,?,?,?,?,?,?)",
-                    use(login),
-                    use(password_hash),
-                    use(first_name),
-                    use(last_name),
-                    use(age),
-                    use(hobby),
-                    use(city);
-                insert.execute();
+                std::string query="INSERT INTO hl.person VALUES(";
+                query+="'"+login+"',";
+                query+="'"+password_hash+"',";
+                query+="'"+first_name+"',";
+                query+="'"+last_name+"',";
+                query+="'"+std::to_string(age)+"',";
+                query+="'"+hobby+"',";
+                query+="'"+city+"'";
+                query+=")";
+                database::Database_MySQL::get().insert(query);
             }
     };
 }

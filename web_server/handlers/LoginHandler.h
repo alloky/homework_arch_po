@@ -43,7 +43,6 @@
     using Poco::Net::NameValueCollection;
     using Poco::Net::HTMLForm;
 
-    #include "../../database/database.h"
     #include "../../database/person.h"
     #include "../session/session.h"
 
