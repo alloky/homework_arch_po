@@ -11,7 +11,7 @@ database::Database_MySQL::Database_MySQL(){
       mysql_close(_con);
       throw std::logic_error(mysql_error(_con));
   }
-};
+}
 
 bool database::Database_MySQL::query(const std::string& query,callback_t callback,callback_row_t callback_row){
     if (mysql_query(_con, query.c_str()))  throw std::logic_error(query);
@@ -37,7 +37,7 @@ void database::Database_MySQL::insert(std::string& query){
 
 database::Database_MySQL::~Database_MySQL(){
     mysql_close(_con);
-};
+}
 
 database::Database_MySQL& database::Database_MySQL::get(){
     static Database_MySQL instance;
