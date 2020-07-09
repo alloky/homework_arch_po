@@ -107,6 +107,7 @@ protected:
             ServerSocket svs(port);
             HTTPServer srv(new HTTPRequestFactory(format), 
                                 svs, new HTTPServerParams);
+            std::cout << "starting server ..." << std::endl;
             srv.start();
             waitForTerminationRequest();
             srv.stop();

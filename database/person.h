@@ -30,6 +30,18 @@ namespace database{
                 return root;
             }
 
+            static void init(){
+                try{
+                    std::cout << "initializing person ..." << std::endl;
+                    std::string query = "CREATE TABLE person (`login` varchar(256) NOT NULL,`password_hash` varchar(1024) NOT NULL,`first_name` varchar(1024) DEFAULT NULL,`last_name` varchar(1024) DEFAULT NULL,`age` int DEFAULT NULL,`hobby` varchar(4096) DEFAULT NULL,`city` varchar(1024) DEFAULT NULL, PRIMARY KEY (`login`))";
+                    database::Database_MySQL::get().execute(query);
+                    std::cout << "initializing person ... done" << std::endl;
+                }catch(...){
+                    std::cout << "initializing person ... fail" << std::endl;
+                }
+
+            }
+
             static bool   check_exist(std::string & login){
                 int count{-1};
 
@@ -96,8 +108,34 @@ namespace database{
                 return result;
             }
 
+            static std::vector<Person> get_friends(){
+                std::vector<Person> result;
+                Person person;
+
+                std::string query="SELECT login, password_hash, first_name,last_name,age,hobby,city FROM person";
+                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
+                {
+                    if (row ==0)
+                        switch(column){
+                            case 0: person.login = value; break;
+                            case 1: person.password_hash= value;break;
+                            case 2: person.first_name=value;break;
+                            case 3: person.last_name=value;break;
+                            case 4: person.age=atoi(value.c_str());break;
+                            case 5: person.hobby=value;break;
+                            case 6: person.city=value;break;
+                        }
+                    
+                },[&](int){
+                    result.push_back(person);
+                });
+                
+
+                return result;
+            }
+
             void insert(){
-                std::string query="INSERT INTO hl.person VALUES(";
+                std::string query="INSERT INTO person VALUES(";
                 query+="'"+login+"',";
                 query+="'"+password_hash+"',";
                 query+="'"+first_name+"',";
@@ -106,7 +144,7 @@ namespace database{
                 query+="'"+hobby+"',";
                 query+="'"+city+"'";
                 query+=")";
-                database::Database_MySQL::get().insert(query);
+                database::Database_MySQL::get().execute(query);
             }
     };
 }

@@ -3,11 +3,12 @@
 #include <iostream>
 
 database::Database_MySQL::Database_MySQL(){
-
+    std::cout << "connecting to mysql ... " << std::endl;
     _con = mysql_init(nullptr);
     if(_con == nullptr) throw std::logic_error("unable to create connection object for mysql");
     if (mysql_real_connect(_con, "localhost", "root", "3.14Oneer",
           "hl", 0, NULL, 0) == NULL) {
+      std::cout << "connecting to mysql ... fail" << std::endl;
       mysql_close(_con);
       throw std::logic_error(mysql_error(_con));
   }
@@ -31,7 +32,7 @@ bool database::Database_MySQL::query(const std::string& query,callback_t callbac
     return true;
 }
 
-void database::Database_MySQL::insert(std::string& query){
+void database::Database_MySQL::execute(std::string& query){
     if (mysql_query(_con, query.c_str()))  throw std::logic_error(query);
 }
 

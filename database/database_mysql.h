@@ -17,7 +17,7 @@ namespace database{
                 MYSQL *_con;
             public:
                 bool query(const std::string& query,callback_t callback,callback_row_t callback_row);
-                void insert(std::string& query);
+                void execute(std::string& query);
                 static Database_MySQL& get();
                 static std::string get_version();
                 ~Database_MySQL();
