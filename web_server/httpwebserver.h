@@ -99,7 +99,7 @@ protected:
         if (!_helpRequested)
         {
             unsigned short port = (unsigned short)
-                config().getInt("HTTPWebServer.port", 9980);
+                config().getInt("HTTPWebServer.port", 8080);
             std::string format(
                 config().getString("HTTPWebServer.format", 
                                    DateTimeFormat::SORTABLE_FORMAT));
