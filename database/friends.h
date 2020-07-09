@@ -13,10 +13,10 @@ namespace database{
 
         static void init(){
                 try{
-                    std::cout << "initializing friends ... fail" << std::endl;
+                    std::cout << "initializing friends ... " << std::endl;
                     std::string query = "CREATE TABLE friends (`id` int NOT NULL AUTO_INCREMENT,`source_login` VARCHAR(256) NOT NULL,`destination_login` VARCHAR(256) NOT NULL,PRIMARY KEY (`id`))";
                     database::Database_MySQL::get().execute(query);
-                    std::cout << "initializing friends ... fail" << std::endl;
+                    std::cout << "initializing friends ... done" << std::endl;
                 }catch(...){
                     std::cout << "initializing friends ... fail" << std::endl;
                 }
