@@ -104,7 +104,7 @@ protected:
                 config().getString("HTTPWebServer.format", 
                                    DateTimeFormat::SORTABLE_FORMAT));
 
-            ServerSocket svs(port);
+            ServerSocket svs(Poco::Net::SocketAddress("0.0.0.0",port));
             HTTPServer srv(new HTTPRequestFactory(format), 
                                 svs, new HTTPServerParams);
             std::cout << "starting server ..." << std::endl;
