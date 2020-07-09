@@ -7,6 +7,7 @@ SET (WEBSERVICE_BINARY "server")
 find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
+find_package(ZLIB)
 find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL)
 
 if(NOT ${Poco_FOUND})
@@ -28,7 +29,8 @@ target_compile_options(${WEBSERVICE_BINARY} PRIVATE -Wall -Wextra -pedantic -Wer
 target_link_libraries(${WEBSERVICE_BINARY} PRIVATE 
                              ${CMAKE_THREAD_LIBS_INIT} 
                              ${Poco_LIBRARIES}
-                             "libmysqlclient.a")
+                             "libmysqlclient.a"
+                             ZLIB::ZLIB)
 
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
