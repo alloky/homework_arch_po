@@ -42,6 +42,28 @@ namespace database{
 
             }
 
+            static std::vector<std::string> get_logins_starting(const std::string& filter){
+                std::vector<std::string> result;
+                std::string record;
+
+                std::string query="SELECT login FROM person WHERE login LIKE'"+filter+"%'";
+                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
+                {
+                    row = 0;
+                    switch(column){
+                            case 0: record = value; 
+                            break;
+                            
+                        }
+
+                    
+                },[&](int){
+                    result.push_back(record);
+                });
+                
+                return result;
+            }
+
             static bool   check_exist(std::string & login){
                 int count{-1};
 

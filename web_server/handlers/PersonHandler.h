@@ -77,6 +77,7 @@
                             database::Person person = database::Person::get_person(login);           
                             Poco::JSON::Stringifier::stringify(person.toJSON(),ostr);
                         }catch(...){
+                            std::cout << "person query exception session_id:" << session_id << std::endl;
                         }
                     } 
                 }

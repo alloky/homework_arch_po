@@ -42,7 +42,7 @@ namespace database{
                 std::string query="SELECT destination_login FROM friends WHERE source_login='"+source_login+"'";
                 database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
                 {
-                    if (row ==0)
+                    row = 0;
                         switch(column){
                             case 0: record.destination_login = value; break;
                             
@@ -54,24 +54,28 @@ namespace database{
                 
                 return result;
             }
+         
+         
 
          void insert(){
             std::string query;
 
-            query = "INSERT INTO friends VALUES('"+source_login+"','"+destination_login+"')";
+            query = "INSERT INTO friends (source_login,destination_login) VALUES('"+source_login+"','"+destination_login+"')";
+            
             database::Database_MySQL::get().execute(query);
 
-            query = "INSERT INTO friends VALUES('"+destination_login+"','"+source_login+"')";
+            query = "INSERT INTO friends(source_login,destination_login)  VALUES('"+destination_login+"','"+source_login+"')";
+            
             database::Database_MySQL::get().execute(query);
         }
 
         void remove(){
             std::string query;
 
-            query = "DELETE FROM friends WHERE source_login='"+source_login+"'";
+            query = "DELETE FROM friends WHERE source_login='"+source_login+"' and destination_login='"+destination_login+"'";
             database::Database_MySQL::get().execute(query);
 
-            query = "DELETE FROM friends WHERE source_login='"+destination_login+"'";
+            query = "DELETE FROM friends WHERE source_login='"+destination_login+"' and destination_login='"+source_login+"'";
             database::Database_MySQL::get().execute(query);
         }
     };

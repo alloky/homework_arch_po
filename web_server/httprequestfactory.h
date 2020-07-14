@@ -43,6 +43,7 @@ using Poco::Util::HelpFormatter;
 #include "handlers/PersonHandler.h"
 #include "handlers/LoginHandler.h"
 #include "handlers/SignupHandler.h"
+#include "handlers/FriendsHandler.h"
 /*
 static bool endsWith(const std::string& str, const std::string& suffix)
 {
@@ -70,13 +71,14 @@ public:
         std::string person = "/person";
         std::string login = "/login";
         std::string signup = "/signup";
-
+        std::string friends = "/friends";
 
         if (request.getURI() == "/")   return new TimeRequestHandler(_format);
         if (request.getURI().find(html)!=std::string::npos)     return new WebPageHandler(_format);
         if (startsWith(request.getURI(),person)) return new PersonHandler(_format);
         if (startsWith(request.getURI(),login))  return new LoginHandler(_format);
         if (startsWith(request.getURI(),signup))  return new SignupHandler(_format);
+        if (startsWith(request.getURI(),friends))  return new FriendsHandler(_format);
 
         return 0;
     }
