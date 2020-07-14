@@ -47,9 +47,9 @@ namespace database{
                 std::string record;
 
                 std::string query="SELECT login FROM person WHERE login LIKE'"+filter+"%'";
-                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
+                database::Database_MySQL::get().query(query,[&](int ,int column,std::string value)
                 {
-                    row = 0;
+
                     switch(column){
                             case 0: record = value; 
                             break;

@@ -40,9 +40,8 @@ namespace database{
 
                 record.source_login = source_login;
                 std::string query="SELECT destination_login FROM friends WHERE source_login='"+source_login+"'";
-                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
+                database::Database_MySQL::get().query(query,[&](int ,int column,std::string value)
                 {
-                    row = 0;
                         switch(column){
                             case 0: record.destination_login = value; break;
                             
