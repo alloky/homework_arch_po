@@ -14,7 +14,10 @@ namespace database{
             private:
                 Database_MySQL();
 
-                MYSQL *_con;
+                
+
+                void connect();
+                void disconnect();
             public:
                 bool query(const std::string& query,callback_t callback,callback_row_t callback_row);
                 void execute(std::string& query);
