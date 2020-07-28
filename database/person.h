@@ -109,9 +109,40 @@ namespace database{
                 Person person;
 
                 std::string query="SELECT login, password_hash, first_name,last_name,age,hobby,city FROM person";
-                database::Database_MySQL::get().query(query,[&](int row,int column,std::string value)
+                database::Database_MySQL::get().query(query,[&](int ,int column,std::string value)
                 {
-                    if (row ==0)
+                        switch(column){
+                            case 0: person.login = value; break;
+                            case 1: person.password_hash= value;break;
+                            case 2: person.first_name=value;break;
+                            case 3: person.last_name=value;break;
+                            case 4: person.age=atoi(value.c_str());break;
+                            case 5: person.hobby=value;break;
+                            case 6: person.city=value;break;
+                        }
+                    
+                },[&](int){
+                    result.push_back(person);
+                });
+                
+
+                return result;
+            }
+
+            static std::vector<Person> search(const std::string& first_name, const std::string& last_name){
+                std::vector<Person> result;
+                Person person;
+
+                std::string query="SELECT login, password_hash, first_name,last_name,age,hobby,city FROM person WHERE ";
+                query += "first_name LIKE '";
+                query += first_name;
+                query += "%' and last_name LIKE '";
+                query += last_name;
+                query += "%'";
+
+                
+                database::Database_MySQL::get().query(query,[&](int ,int column,std::string value)
+                {
                         switch(column){
                             case 0: person.login = value; break;
                             case 1: person.password_hash= value;break;

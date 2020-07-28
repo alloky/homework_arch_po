@@ -1,5 +1,5 @@
-        #ifndef PERSONHANDLER_H
-        #define PERSONHANDLER_H
+        #ifndef SEARCHHANDLER_H
+        #define SEARCHHANDLER_H
 
         #include "Poco/Net/HTTPServer.h"
         #include "Poco/Net/HTTPRequestHandler.h"
@@ -46,12 +46,10 @@
         #include "../../database/person.h"
         #include "../session/session.h"
 
-        #include <map>
-
-        class PersonHandler: public HTTPRequestHandler
+        class SearchHandler: public HTTPRequestHandler
         {
         public:
-            PersonHandler(const std::string& format): _format(format)
+            SearchHandler(const std::string& format): _format(format)
             {
             }
 
@@ -66,18 +64,26 @@
                 response.setChunkedTransferEncoding(true);
                 response.setContentType("application/json");
                 std::ostream& ostr = response.send();
-                if(form.has("session_id")){
-                    std::string session_str=form.get("session_id"); 
+                if(form.has("session_id"))
+                if(form.has("first_name"))
+                if(form.has("last_name"))
+                {
+                    std::string session_str = form.get("session_id"); 
+                    std::string first_name  = form.get("first_name"); 
+                    std::string last_name   = form.get("last_name"); 
                     
                     long  session_id = stol(session_str);
 
                     if(webserver::Session::get().is_correct(session_id)){
                         try{
-                            std::string login = webserver::Session::get().get_login(session_id);
-                            database::Person person = database::Person::get_person(login);           
-                            Poco::JSON::Stringifier::stringify(person.toJSON(),ostr);
+                           
+                            std::vector<database::Person> persons = database::Person::search(first_name,last_name);
+                            
+                            Poco::JSON::Array arr;
+                            for(auto s: persons) arr.add(s.toJSON());
+                            Poco::JSON::Stringifier::stringify(arr,ostr);           
                         }catch(...){
-                            std::cout << "person query exception session_id:" << session_id << std::endl;
+                            std::cout << "search query exception session_id:" << session_id << std::endl;
                         }
                     } 
                 }
@@ -87,4 +93,4 @@
         private:
             std::string _format;
         };
-        #endif // !PERSONHANDLER_H
+        #endif // !SEARCHHANDLER_H

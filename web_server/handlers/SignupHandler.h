@@ -141,8 +141,8 @@
             void handleRequest(HTTPServerRequest& request,
                             HTTPServerResponse& response)
             {
-                Application& app = Application::instance();
-                app.logger().information("Signup Request from " + request.clientAddress().toString());
+                //Application& app = Application::instance();
+                //app.logger().information("Signup Request from " + request.clientAddress().toString());
 
                 HTMLForm form(request,request.stream());
                 response.setChunkedTransferEncoding(true);

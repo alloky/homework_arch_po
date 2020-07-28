@@ -57,8 +57,8 @@
         void handleRequest(HTTPServerRequest& request,
                         HTTPServerResponse& response)
         {
-            Application& app = Application::instance();
-            app.logger().information("Login Request from " + request.clientAddress().toString());
+            //Application& app = Application::instance();
+            //app.logger().information("Login Request from " + request.clientAddress().toString());
 
             HTMLForm form(request);
             response.setChunkedTransferEncoding(true);

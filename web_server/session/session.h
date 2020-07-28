@@ -5,11 +5,13 @@
 
 #include <map>
 #include <string>
+#include <mutex>
 
 namespace webserver{
     class Session{
         private:
             Session();
+            std::mutex                 _mtx;
             std::map<long,std::string> _sessions;
         public:
             static Session& get();    

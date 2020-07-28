@@ -59,8 +59,8 @@
             void handleRequest(HTTPServerRequest& request,
                             HTTPServerResponse& response)
             {
-                Application& app = Application::instance();
-                app.logger().information("Friends Request from " + request.clientAddress().toString());
+                //Application& app = Application::instance();
+               // app.logger().information("Friends Request from " + request.clientAddress().toString());
 
 
                 HTMLForm form(request);

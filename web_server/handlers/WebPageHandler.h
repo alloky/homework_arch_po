@@ -50,9 +50,8 @@ public:
     void handleRequest(HTTPServerRequest& request,
                        HTTPServerResponse& response)
     {
-        Application& app = Application::instance();
-        app.logger().information("HTML Request from "
-            + request.clientAddress().toString());
+       // Application& app = Application::instance();
+       // app.logger().information("HTML Request from "    + request.clientAddress().toString());
 
         response.setChunkedTransferEncoding(true);
         response.setContentType("text/html");
