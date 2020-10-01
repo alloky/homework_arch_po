@@ -45,13 +45,19 @@ sudo cp *.so /usr/lib
 ## Update Library Cache
 sudo ldconfig
 
+## Don't forget to start mysql
 sudo mysql_secure_installation utility
 sudo systemctl start mysql
 sudo systemctl enable mysql
 
+## MySQL configuration hints
 /etc/mysql/mysql.conf.d/mysqld.cnf:
 skip-grant-tables
 bind-address		= 127.0.0.1 ( The default. )
 bind-address		= XXX.XXX.XXX.XXX ( The ip address of your Public Net interface. )
 bind-address		= ZZZ.ZZZ.ZZZ.ZZZ ( The ip address of your Service Net interface. )
 bind-address		= 0.0.0.0 ( All ip addresses. )
+
+Access from other machines:
+CREATE USER 'root'@'%' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';

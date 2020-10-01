@@ -13,6 +13,11 @@ using callback_row_t = std::function<void(int)>;
 
 namespace database{
 
+    enum class ConnectionType{
+        READ,
+        WRITE
+    };
+
     struct Connection{
          MYSQL *_con;
          Connection(MYSQL *con) : _con(con){
@@ -39,7 +44,7 @@ namespace database{
                 std::mutex              _pool_mutex;
                 std::vector<Connection> _pool;
 
-                Connection acquire();
+                Connection acquire(ConnectionType ct);
                 void       release(Connection& connection);
 
             public:

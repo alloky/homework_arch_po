@@ -46,6 +46,7 @@ using Poco::Util::HelpFormatter;
 #include "handlers/FriendsHandler.h"
 #include "handlers/ImportHandler.h"
 #include "handlers/SearchHandler.h"
+#include "handlers/ConfigHandler.h"
 
 /*
 static bool endsWith(const std::string& str, const std::string& suffix)
@@ -77,6 +78,7 @@ public:
         std::string friends = "/friends";
         std::string import = "/import";
         std::string search = "/search";
+        std::string config = "/config";
 
         if (request.getURI() == "/")   return new TimeRequestHandler(_format);
         if (request.getURI().find(html)!=std::string::npos)     return new WebPageHandler(_format);
@@ -86,6 +88,7 @@ public:
         if (startsWith(request.getURI(),friends))  return new FriendsHandler(_format);
         if (startsWith(request.getURI(),import))  return new ImportHandler(_format);
         if (startsWith(request.getURI(),search))  return new SearchHandler(_format);
+        if (startsWith(request.getURI(),config))  return new ConfigHandler(_format);
 
         return 0;
     }

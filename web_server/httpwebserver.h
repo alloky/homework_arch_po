@@ -22,31 +22,34 @@
 
 #define UNUSED(value) (void)value
 
-using Poco::Net::ServerSocket;
+using Poco::DateTimeFormat;
+using Poco::DateTimeFormatter;
+using Poco::ThreadPool;
+using Poco::Timestamp;
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPRequestHandlerFactory;
 using Poco::Net::HTTPServer;
+using Poco::Net::HTTPServerParams;
 using Poco::Net::HTTPServerRequest;
 using Poco::Net::HTTPServerResponse;
-using Poco::Net::HTTPServerParams;
-using Poco::Timestamp;
-using Poco::DateTimeFormatter;
-using Poco::DateTimeFormat;
-using Poco::ThreadPool;
-using Poco::Util::ServerApplication;
+using Poco::Net::ServerSocket;
 using Poco::Util::Application;
-using Poco::Util::Option;
-using Poco::Util::OptionSet;
-using Poco::Util::OptionCallback;
 using Poco::Util::HelpFormatter;
+using Poco::Util::Option;
+using Poco::Util::OptionCallback;
+using Poco::Util::OptionSet;
+using Poco::Util::ServerApplication;
 
 #include "httprequestfactory.h"
+#include "config.h"
+#include "../database/friends.h"
+#include "../database/person.h"
+//#include "../database/chat.h"
 
-
-class HTTPWebServer: public Poco::Util::ServerApplication
+class HTTPWebServer : public Poco::Util::ServerApplication
 {
 public:
-    HTTPWebServer(): _helpRequested(false)
+    HTTPWebServer() : _helpRequested(false)
     {
     }
 
@@ -55,7 +58,7 @@ public:
     }
 
 protected:
-    void initialize(Application& self)
+    void initialize(Application &self)
     {
         loadConfiguration();
         ServerApplication::initialize(self);
@@ -66,20 +69,65 @@ protected:
         ServerApplication::uninitialize();
     }
 
-    void defineOptions(OptionSet& options)
+    void defineOptions(OptionSet &options)
     {
         ServerApplication::defineOptions(options);
 
         options.addOption(
-        Option("help", "h", "display argument help information")
-            .required(false)
-            .repeatable(false)
-            .callback(OptionCallback<HTTPWebServer>(
-                this, &HTTPWebServer::handleHelp)));
+            Option("help", "h", "display argument help information")
+                .required(false)
+                .repeatable(false)
+                .callback(OptionCallback<HTTPWebServer>(this, &HTTPWebServer::handleHelp)));
+       options.addOption(
+            Option("read", "r", "set ip address for read requests")
+                .required(false)
+                .repeatable(false)
+                .argument("value")
+                .callback(OptionCallback<HTTPWebServer>(this, &HTTPWebServer::handleReadIP)));
+       options.addOption(
+            Option("write", "w", "set ip address for write requests")
+                .required(false)
+                .repeatable(false)
+                .argument("value")
+                .callback(OptionCallback<HTTPWebServer>(this, &HTTPWebServer::handleWriteIP)));
+       options.addOption(
+            Option("init_db", "db", "create database tables")
+                .required(false)
+                .repeatable(false)
+                .callback(OptionCallback<HTTPWebServer>(this, &HTTPWebServer::handleInitDB)));    
     }
 
-    void handleHelp(const std::string& name, 
-                    const std::string& value)
+    void handleInitDB(const std::string &name,
+                    const std::string &value)
+    {
+        database::Person::init();
+        database::Friends::init();
+        //database::Chat::init();
+
+        UNUSED(name);
+        UNUSED(value);
+    }
+
+    void handleReadIP(const std::string &name,
+                    const std::string &value)
+    {
+        std::cout << name << "=" << value << std::endl;
+        Config::get().read_request_ip()=value;
+        UNUSED(name);
+        UNUSED(value);
+    }
+
+    void handleWriteIP(const std::string &name,
+                    const std::string &value)
+    {
+        std::cout << name << "=" << value << std::endl;
+        Config::get().write_request_ip()=value;
+        UNUSED(name);
+        UNUSED(value);
+    }
+ 
+    void handleHelp(const std::string &name,
+                    const std::string &value)
     {
         HelpFormatter helpFormatter(options());
         helpFormatter.setCommand(commandName());
@@ -94,19 +142,20 @@ protected:
         UNUSED(value);
     }
 
-    int main(const std::vector<std::string>& args)
+    int main(const std::vector<std::string> &args)
     {
         if (!_helpRequested)
         {
             unsigned short port = (unsigned short)
-                config().getInt("HTTPWebServer.port", 8080);
+                                      config()
+                                          .getInt("HTTPWebServer.port", 8080);
             std::string format(
-                config().getString("HTTPWebServer.format", 
+                config().getString("HTTPWebServer.format",
                                    DateTimeFormat::SORTABLE_FORMAT));
 
-            ServerSocket svs(Poco::Net::SocketAddress("0.0.0.0",port));
-            HTTPServer srv(new HTTPRequestFactory(format), 
-                                svs, new HTTPServerParams);
+            ServerSocket svs(Poco::Net::SocketAddress("0.0.0.0", port));
+            HTTPServer srv(new HTTPRequestFactory(format),
+                           svs, new HTTPServerParams);
             std::cout << "starting server ..." << std::endl;
             srv.start();
             waitForTerminationRequest();

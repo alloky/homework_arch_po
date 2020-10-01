@@ -65,7 +65,7 @@ namespace database{
                 return result;
             }
 
-            
+            /*
 
             void insert(){
                 std::string query="INSERT INTO person VALUES(";
@@ -78,7 +78,7 @@ namespace database{
                 query+="'"+city+"'";
                 query+=")";
                 database::Database_MySQL::get().execute(query);
-            }
+            }*/
     };
 }
 #endif
