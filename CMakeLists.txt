@@ -20,6 +20,7 @@ include_directories("/usr/local/include/mysql")
 link_directories("/usr/local/lib")
 
 add_executable(${WEBSERVICE_BINARY} main.cpp 
+                                    web_server/config.cpp
                                     web_server/session/session.cpp
                                     database/database_mysql.cpp)
 
