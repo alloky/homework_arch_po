@@ -8,7 +8,11 @@ find_package(OpenSSL)
 find_package(GTest REQUIRED)
 find_package(Threads)
 find_package(ZLIB)
-find_package(Poco REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL)
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
+find_package(REQUIRED COMPONENTS Foundation Util Net XML JSON Crypto NetSSL)
 
 if(NOT ${Poco_FOUND})
     message(FATAL_ERROR "Poco C++ Libraries not found.")
@@ -25,13 +29,15 @@ add_executable(${WEBSERVICE_BINARY} main.cpp
                                     database/database_mysql.cpp)
 
 target_include_directories(${WEBSERVICE_BINARY} PRIVATE "${CMAKE_BINARY_DIR}")
-target_compile_options(${WEBSERVICE_BINARY} PRIVATE -Wall -Wextra -pedantic -Werror )
+target_compile_options(${WEBSERVICE_BINARY} PRIVATE -Wall -Wextra )
 
 target_link_libraries(${WEBSERVICE_BINARY} PRIVATE 
                              ${CMAKE_THREAD_LIBS_INIT} 
                              ${Poco_LIBRARIES}
                              "libmysqlclient.a"
-                             ZLIB::ZLIB)
+                             ZLIB::ZLIB
+                             ${CONAN_LIBS})
+
 
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(${WEBSERVICE_BINARY} PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)

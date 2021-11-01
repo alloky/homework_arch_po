@@ -19,6 +19,8 @@
         #include "Poco/Util/Option.h"
         #include "Poco/Util/OptionSet.h"
         #include "Poco/Util/HelpFormatter.h"
+        #include "Poco/URI.h"
+
         #include <iostream>
         #include <iostream>
         #include <fstream>
@@ -62,7 +64,7 @@
                 //app.logger().information("Person Request from " + request.clientAddress().toString());
 
 
-                HTMLForm form(request);
+                HTMLForm form(request, request.stream());
                 response.setChunkedTransferEncoding(true);
                 response.setContentType("application/json");
                 std::ostream& ostr = response.send();
@@ -80,6 +82,74 @@
                             std::cout << "person query exception session_id:" << session_id << std::endl;
                         }
                     } 
+                } else {
+                    std::cout << "here" <<  std::endl;
+                    auto reqMethod = request.getMethod();
+                    if (reqMethod == "GET") {
+                        if (form.size() == 1) {
+                            if (!form.has("login")) {
+                                response.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_BAD_REQUEST);
+                            }
+                            try{
+                                std::string login = form.get("login");
+                                database::Person person = database::Person::get_person(login);           
+                                Poco::JSON::Stringifier::stringify(person.toJSON(),ostr);
+                            }catch(...){
+                                // std::cout << "p << session_id << std::endl;
+                                Poco::JSON::Stringifier::stringify("{}",ostr);
+                            }
+                        } 
+                        if (form.size() == 2) {
+                            std::string first_name, last_name;
+                            if (form.has("first_name") && form.has("last_name")){
+                                first_name = form.get("first_name") ;
+                                last_name = form.get("last_name") ;
+                            } else {
+                                response.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_BAD_REQUEST);
+                                return;
+                            }
+                            try{
+                                auto persons = database::Person::search(first_name, last_name);
+                                Poco::JSON::Array result;
+                                for (auto& per : persons)
+                                    result.add(per.toJSON());
+                                Poco::JSON::Stringifier::stringify(result, ostr);
+                                    
+                            }catch(...){
+                                // std::cout << "p << session_id << std::endl;
+                                Poco::JSON::Stringifier::stringify("{}",ostr);
+                            }
+                        }
+                    } else if (reqMethod == "POST") {
+                        std::string login, first_name, last_name;
+                        long age;
+                        try {
+                            login=form.get("login"); 
+                            first_name=form.get("first_name"); 
+                            last_name=form.get("last_name");
+                            age=stol(form.get("age"));
+                        }
+                        catch(...) {
+                            response.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_BAD_REQUEST);
+                            return;
+                        }
+                        database::Person person;
+                        
+                        person.login = login;
+                        person.password_hash = login;
+                        person.first_name = first_name;
+                        person.last_name = last_name;
+                        person.age = age;
+
+                        try{
+                            person.insert();
+                        }catch(...){
+                            std::cout << "person query exception" << std::endl;
+                        }
+                        
+                    } else {
+                        response.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_BAD_REQUEST);
+                    }
                 }
                 response.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR);
             }

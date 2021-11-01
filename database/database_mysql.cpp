@@ -11,7 +11,7 @@ database::Database_MySQL::Database_MySQL()
 database::Connection database::Database_MySQL::acquire(ConnectionType ct)
 {
     MYSQL *_con;
-    std::string server_ip = "localhost";
+    std::string server_ip = "db";
 
     switch (ct)
     {
@@ -25,9 +25,12 @@ database::Connection database::Database_MySQL::acquire(ConnectionType ct)
     _con = mysql_init(nullptr);
     if (_con == nullptr)
         throw std::logic_error("unable to create connection object for mysql");
+    int ret = 0;
     if (mysql_real_connect(_con, server_ip.c_str(), "root", "3.14Oneer",
-                           "hl", 0, NULL, 0) == NULL)
+                           "hl", 
+                           3306 /* port */,  NULL, 0) == NULL)
     {
+        std::cout << "Failed to connect to database: Error: " << mysql_error(_con) << std::endl;
         mysql_close(_con);
         throw std::logic_error(mysql_error(_con));
     }

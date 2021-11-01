@@ -3,11 +3,6 @@
 
 #include "web_server/httpwebserver.h"
 
-
-
-
-
-
 int main(int argc, char *argv[])
 {
     std::cout << "MySQL version:" << database::Database_MySQL::get_version() << std::endl;
