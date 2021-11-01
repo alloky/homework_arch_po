@@ -1,0 +1,644 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "bin/server"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"install",
+			"link_directories",
+			"conan_global_flags",
+			"conan_basic_setup",
+			"target_link_libraries",
+			"add_compile_options",
+			"target_compile_options",
+			"include_directories",
+			"target_include_directories",
+			"set_target_properties"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"build/conanbuildinfo.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 1692,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 2193,
+				"parent" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 34,
+				"parent" : 0
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 2204,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"command" : 8,
+				"file" : 1,
+				"line" : 2186,
+				"parent" : 4
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 0
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 31,
+				"parent" : 0
+			},
+			{
+				"command" : 10,
+				"file" : 0,
+				"line" : 43,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g "
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DAPR_DECLARE_STATIC"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DXML_STATIC"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DAPU_DECLARE_STATIC"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DPCRE_STATIC=1"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DPOCO_STATIC=ON"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-DPOCO_UNBUNDLED"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wextra"
+				},
+				{
+					"fragment" : "-std=gnu++1z"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/poco/1.11.0/_/_/package/22eda37759af2fef19902bdcb425dc1c049c7f23/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/pcre/8.45/_/_/package/9f7bf24b68c18f44b467c84f6f20820cfade908b/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/sqlite3/3.36.0/_/_/package/b44911574631882247d36a430d78dc66c47fc715/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/libpq/13.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/apr-util/1.6.1/_/_/package/881d178633bea5d3359192e7549c627a24074cec/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/libmysqlclient/8.0.25/_/_/package/f819302ae9fcf6ed467016ec2ec42696fdfba3d9/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/bzip2/1.0.8/_/_/package/5712964edf62ce3618094532519f7c0e8fc974cf/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/zlib/1.2.11/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/expat/2.4.1/_/_/package/8b564c3f5d90fb08f38ee6674624686b669b5ec1/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/openssl/1.1.1k/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/apr/1.7.0/_/_/package/1e34ecce38a6fd778c8f9c3e2aada8c48b3703d3/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/libiconv/1.16/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/zstd/1.5.0/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/root/.conan/data/lz4/1.9.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/include"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/usr/local/include/mysql"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/root/app/code/build"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					13
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"id" : "server::@6890427a1f51a3e7e1df",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 2,
+				"path" : "bin"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-rdynamic",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/poco/1.11.0/_/_/package/22eda37759af2fef19902bdcb425dc1c049c7f23/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/pcre/8.45/_/_/package/9f7bf24b68c18f44b467c84f6f20820cfade908b/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/sqlite3/3.36.0/_/_/package/b44911574631882247d36a430d78dc66c47fc715/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/libpq/13.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/apr-util/1.6.1/_/_/package/881d178633bea5d3359192e7549c627a24074cec/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/libmysqlclient/8.0.25/_/_/package/f819302ae9fcf6ed467016ec2ec42696fdfba3d9/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/bzip2/1.0.8/_/_/package/5712964edf62ce3618094532519f7c0e8fc974cf/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/zlib/1.2.11/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/expat/2.4.1/_/_/package/8b564c3f5d90fb08f38ee6674624686b669b5ec1/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/openssl/1.1.1k/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/apr/1.7.0/_/_/package/1e34ecce38a6fd778c8f9c3e2aada8c48b3703d3/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/libiconv/1.16/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/zstd/1.5.0/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/root/.conan/data/lz4/1.9.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "-L/usr/local/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/root/.conan/data/poco/1.11.0/_/_/package/22eda37759af2fef19902bdcb425dc1c049c7f23/lib:/root/.conan/data/pcre/8.45/_/_/package/9f7bf24b68c18f44b467c84f6f20820cfade908b/lib:/root/.conan/data/sqlite3/3.36.0/_/_/package/b44911574631882247d36a430d78dc66c47fc715/lib:/root/.conan/data/libpq/13.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/root/.conan/data/apr-util/1.6.1/_/_/package/881d178633bea5d3359192e7549c627a24074cec/lib:/root/.conan/data/libmysqlclient/8.0.25/_/_/package/f819302ae9fcf6ed467016ec2ec42696fdfba3d9/lib:/root/.conan/data/bzip2/1.0.8/_/_/package/5712964edf62ce3618094532519f7c0e8fc974cf/lib:/root/.conan/data/zlib/1.2.11/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/root/.conan/data/expat/2.4.1/_/_/package/8b564c3f5d90fb08f38ee6674624686b669b5ec1/lib:/root/.conan/data/openssl/1.1.1k/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/root/.conan/data/apr/1.7.0/_/_/package/1e34ecce38a6fd778c8f9c3e2aada8c48b3703d3/lib:/root/.conan/data/libiconv/1.16/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/root/.conan/data/zstd/1.5.0/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/root/.conan/data/lz4/1.9.3/_/_/package/6c07b793c4aa4ddff70625d62e11a1646fcbd578/lib:/usr/local/lib:",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-Bstatic",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lmysqlclient",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-Bdynamic",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libz.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoZip",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoNetSSL",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoDataSQLite",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoJWT",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoRedis",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoActiveRecord",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoUtil",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoMongoDB",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoDataPostgreSQL",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoDataMySQL",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoCrypto",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoXML",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoNet",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoData",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoJSON",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoEncodings",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lPocoFoundation",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpcreposix",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpcre",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpcre16",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpcre32",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lsqlite3",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpq",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpgcommon",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpgcommon_shlib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpgport",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpgport_shlib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-laprutil-1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lmysqlclient",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lbz2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lz",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lexpat",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lssl",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lcrypto",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lapr-1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-liconv",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lcharset",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lzstd",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-llz4",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lstdc++",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lm",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lrt",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-ldl",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "server",
+	"nameOnDisk" : "server",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "web_server/config.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "web_server/session/session.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "database/database_mysql.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
