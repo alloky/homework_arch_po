@@ -1,9 +1,0 @@
-/root/app/code/build/CMakeFiles/install/strip.dir
-/root/app/code/build/CMakeFiles/install/local.dir
-/root/app/code/build/CMakeFiles/install.dir
-/root/app/code/build/CMakeFiles/package.dir
-/root/app/code/build/CMakeFiles/package_source.dir
-/root/app/code/build/CMakeFiles/server.dir
-/root/app/code/build/CMakeFiles/rebuild_cache.dir
-/root/app/code/build/CMakeFiles/edit_cache.dir
-/root/app/code/build/CMakeFiles/list_install_components.dir
