@@ -1,63 +1,31 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Докерезированный POCO сервер
 
+- Для работы необходимы docker и docker compose на хост машине
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+**Осторожно!** В контейнер пробрасываются ssh ключи (не разобрался как без этого законнектиться в контейнер по ssh)
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+# Структура
 
-# Installation and Dependancy
+- code - пробрасывается как volume в контейнер
+- Dockerfile - конфиг контейнера с сервером, также в него добавлен ssh сервер, чтобы можно было коннектиться через vscode
+- docker-compose.yml - конфигурирует контейнер с сервером и контейнер с базой
 
-## Install Cmake
-sudo apt-get install gcc
-sudo apt-get install g++
-sudo apt-get install cmake
+Скрипты:
 
-## Install OpenSSL
-sudo apt-get install libssl-dev
+- start.sh - поднять всё, использя кэш
+- restart.sh - поднять без кэша
+- test.sh - протестировать запросы через curl
 
-## zlib
-sudo apt-get install zlib1g-dev
+# (*Небольшие костыли* зачеркнуто) Процесс инициализации:
 
-## mysql
-sudo apt-get install mysql-server
-sudo apt-get install mysql-client
-sudo apt-get install libmysqlclient-dev
+После поднятия контейнера необходимо зайти в него и выполнить create_db.sh и внутри build - conan_install.sh.
 
-## Install poco
-git clone -b master https://github.com/pocoproject/poco.git
-cd poco
-mkdir cmake-build
-cd cmake-build
-cmake ..
-cmake --build . --config Release
-sudo cmake --build . --target install
+Затем законнектиться через vscode по ssh в конейнер и поставить extensions (Cmake, CMakeTools, C/C++) vscode внутрь контейнера.
 
-## Install gtest
-sudo apt-get install libgtest-dev
-cd /usr/src/gtest/
-sudo cmake -DBUILD_SHARED_LIBS=ON
-sudo make
-sudo cp *.so /usr/lib
+Далее выполнить CMake build и Run > Start Debugging
 
-## Update Library Cache
-sudo ldconfig
+Если при заходе на localhost:1234 в браузере показывается время - значит вссё ок.
 
-## Don't forget to start mysql
-sudo mysql_secure_installation utility
-sudo systemctl start mysql
-sudo systemctl enable mysql
+# Тестирование
 
-## MySQL configuration hints
-/etc/mysql/mysql.conf.d/mysqld.cnf:
-skip-grant-tables
-bind-address		= 127.0.0.1 ( The default. )
-bind-address		= XXX.XXX.XXX.XXX ( The ip address of your Public Net interface. )
-bind-address		= ZZZ.ZZZ.ZZZ.ZZZ ( The ip address of your Service Net interface. )
-bind-address		= 0.0.0.0 ( All ip addresses. )
-
-Access from other machines:
-CREATE USER 'root'@'%' IDENTIFIED BY 'some_pass';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+Запросы можно проверить при помощи test.sh

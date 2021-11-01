@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'hl'
+      MYSQL_USER: 'simpleuser'
+      MYSQL_PASSWORD: '3.14Oneer'
+      MYSQL_ROOT_PASSWORD: '3.14Oneer'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+  server:
+    build: .
+    ports:
+      - "2222:22"
+      - "1234:1234"
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ./code:/root/app/code
+
+volumes:
+  my-db:
+
