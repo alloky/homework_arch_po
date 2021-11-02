@@ -48,16 +48,12 @@ RUN apt install -y gdb
 RUN apt update && apt upgrade -y && apt install python3-pip cmake build-essential -y
 RUN python3.7 -m pip install conan MarkupSafe==1.1.1
 
+
 RUN conan profile new default --detect  # Generates default profile detecting GCC and sets old ABI
 RUN conan profile update settings.compiler.libcxx=libstdc++11 default  # Sets libcxx to C++11 ABI
 RUN conan profile update settings.compiler.version=7.5 default
 
-# File managment
-RUN mkdir /root/app
-ADD ./Conanfile.txt /root/app/Conanfile.txt
 
-# Conanfile
-# RUN cd code/build/ && conan install /root/app/Conanfile.txt --build=missing 
 
 # Dependencies
 RUN apt install -y libssl-dev
@@ -87,4 +83,13 @@ EXPOSE 22
 
 # RUN cd /home/conan/app && mkdir build && cd build && conan install ../Conanfile.txt
 
-CMD ["/usr/sbin/sshd", "-D"]
+
+RUN apt install -y mysql-client
+
+# File managment
+RUN mkdir /root/app
+ADD ./Conanfile.txt /root/app/Conanfile.txt
+ADD ./setup_env.sh /root/app/setup_env.sh
+RUN chmod +x /root/app/setup_env.sh
+
+CMD /root/app/setup_env.sh
