@@ -1,2 +1,5 @@
 CMakeFiles/*
 .vscode/*
+
+code/build/
+!code/buid/conan_install.sh

@@ -62,6 +62,7 @@
             xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status== 200){
                 var jsonData = xhr.responseText;
+                console.log(xhr);
                 var jsObject = JSON.parse(jsonData);
 
                 if(!jsObject.result){

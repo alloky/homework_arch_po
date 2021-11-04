@@ -3,8 +3,8 @@
 
 
 Config::Config(){
-    _read_request_ip = "localhost";
-    _write_request_ip = "localhost";
+    _read_request_ip = "db";
+    _write_request_ip = "db";
 }
 
 Config & Config::get(){

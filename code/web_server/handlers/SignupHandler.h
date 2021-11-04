@@ -51,7 +51,7 @@
         {
         private:
 
-            bool check_password(const std::string& password1, const std::string &password2,std::string &reason){
+            static bool check_password(const std::string& password1, const std::string &password2,std::string &reason){
                 if(password1!=password2) {
                         reason ="Password1 not equal Password 2";
                         return false;
@@ -65,7 +65,7 @@
                 return true;    
             }
 
-            bool check_login(const std::string& login,std::string &reason){
+            static bool check_login(const std::string& login,std::string &reason){
                 if(login.length()<3) {
                     reason ="Login must be at leas 3 signs";
                     return false; 
@@ -84,7 +84,7 @@
                 return true; 
             };
 
-            bool check_first_name(const std::string& first_name,std::string &reason){
+            static bool check_first_name(const std::string& first_name,std::string &reason){
                 if(first_name.length()<3) {
                     reason ="First name must be at leas 3 signs";
                     return false; 
@@ -103,7 +103,7 @@
                 return true; 
             };
 
-            bool check_last_name(const std::string& last_name,std::string &reason){
+            static bool check_last_name(const std::string& last_name,std::string &reason){
                 if(last_name.length()<3) {
                     reason ="Last name must be at leas 3 signs";
                     return false; 
@@ -123,7 +123,7 @@
             };
 
 
-            bool check_age(const std::string& age,std::string &reason){
+            static bool check_age(const std::string& age,std::string &reason){
                 int age_n = atoi(age.c_str());
 
                 if(age_n<=0){
